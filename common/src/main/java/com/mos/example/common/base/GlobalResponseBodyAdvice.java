@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * 统一返回结果<br/>
- * 指定 basePackages 避免影响 swagger 文档<br/>
- * 指定@Hidden注解让文档不扫描当前类
+ * 统一返回结果
+ * 指定 basePackages 避免影响 swagger 文档
+ * 指定 @Hidden 注解让文档不扫描当前类
  *
  * @author Han
  */

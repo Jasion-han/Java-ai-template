@@ -29,8 +29,8 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * 配置自定义SQL注入器
-     * 用于注入自定义的SQL方法，如批量插入等
+     * 配置自定义 SQL 注入器
+     * 用于注入自定义的 SQL 方法，如批量插入等
      * @return EasySqlInjector
      */
     @Bean

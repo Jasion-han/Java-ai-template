@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * Http状态返回枚举
+ * Http 状态返回枚举
  *
  * @author Han
  **/
@@ -57,9 +57,9 @@ public enum HttpStatusEnum {
      */
     NOT_FOUND(404, "资源，服务未找！"),
     /**
-     * 不允许的http方法
+     * 不允许的 HTTP 方法
      */
-    BAD_METHOD(405, "不允许的http方法"),
+    BAD_METHOD(405, "不允许的 HTTP 方法"),
     /**
      * 资源冲突，或者资源被锁
      */

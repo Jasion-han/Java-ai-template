@@ -9,8 +9,8 @@ import org.apache.ibatis.session.Configuration;
 import java.util.List;
 
 /**
- * 自定义SQL注入器
- * 扩展MybatisPlus默认的SQL注入功能，添加批量插入方法
+ * 自定义 SQL 注入器
+ * 扩展 MybatisPlus 默认的 SQL 注入功能，添加批量插入方法
  *
  * @author Han
  */

@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
+ * 用户查询参数
  * @author Han
  * @since 2025/5/27
  */

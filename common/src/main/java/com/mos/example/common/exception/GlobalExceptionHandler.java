@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 表单参数校验异常（非JSON请求）
+     * 表单参数校验异常（非 JSON 请求）
      */
     @ExceptionHandler(BindException.class)
     public Result<Object> handleBindException(BindException e) {

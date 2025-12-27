@@ -8,6 +8,12 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * 用户视图对象
+ *
+ * @author Han
+ */
+
 @Data
 @Accessors(chain = true)
 public class UserVo implements Serializable {

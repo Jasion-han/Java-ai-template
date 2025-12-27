@@ -17,6 +17,11 @@ import java.util.TimeZone;
 @Configuration
 public class JacksonConfig {
 
+    /**
+     * 配置 Jackson 2 ObjectMapper 构建器
+     * 用于自定义 Jackson 2 的序列化和反序列化行为
+     * @return Jackson2ObjectMapperBuilder
+     */
     @Bean
     public Jackson2ObjectMapperBuilder jackson2ObjectMapperBuilder() {
         return new Jackson2ObjectMapperBuilder()
