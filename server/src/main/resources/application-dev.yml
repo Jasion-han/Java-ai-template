@@ -1,0 +1,90 @@
+spring:
+  datasource:
+    druid:
+      stat-view-servlet:
+        enabled: true # 启用监控页面
+        url-pattern: /druid/* # 监控页面访问路径
+        login-username: admin # 监控页面登录用户名
+        login-password: 123456 # 监控页面登录密码
+        allow: 127.0.0.1 # 白名单（不配置则允许所有访问）
+    dynamic:
+      primary: master
+      strict: true
+      datasource:
+        master:
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://localhost:3306/base?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          druid:
+            initialSize: 5 # 初始化连接数
+            minIdle: 5 # 最小空闲连接池数量
+            maxActive: 30 # 最大连接池数量
+            maxWait: -1 # 获取连接时最大等待时间（毫秒）
+            filters: stat,wall # 连接池监控配置（stat：统计监控信息；wall：SQL防火墙）
+        test:
+          type: com.alibaba.druid.pool.DruidDataSource
+          url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=Asia/Shanghai
+          username: root
+          password: root
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          druid:
+            initialSize: 5 # 初始化连接数
+            minIdle: 5 # 最小空闲连接池数量
+            maxActive: 30 # 最大连接池数量
+            maxWait: -1 # 获取连接时最大等待时间（毫秒）
+            filters: stat,wall # 连接池监控配置（stat：统计监控信息；wall：SQL防火墙）
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      password:
+      database: 0
+
+# mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Sa-Token配置
+sa-token:
+  token-name: token
+  # token 有效期（单位：秒） 默认30天，-1 代表永久有效
+  timeout: 2592000
+  # token 最低活跃频率（单位：秒），如果 token 超过此时间没有访问系统就会被冻结，默认-1 代表不限制，永不冻结
+  active-timeout: -1
+  # 是否允许同一账号多地同时登录 （为 true 时允许一起登录, 为 false 时新登录挤掉旧登录）
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个 token （为 true 时所有登录共用一个 token, 为 false 时每次登录新建一个 token）
+  is-share: true
+  # token 风格（默认可取值：uuid、simple-uuid、random-32、random-64、random-128、tik）
+  token-style: uuid
+  # 是否输出操作日志
+  is-log: false
+
+# 文档配置
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v3/api-docs
+  group-configs:
+    - group: 'default'
+      paths-to-match: '/**'
+      packages-to-scan: com.mos.base
+knife4j:
+  enable: true
+  production: false # 生产环境屏蔽
+
+# 日志配置
+logging:
+  file:
+    path: D:/logs/base1
+  level:
+    root: info
+    org.springframework: info
