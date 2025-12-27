@@ -9,13 +9,13 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 用户DTO类
+ * 用户 DTO
  *
- * @author ly
+ * @author Han
  */
 @Data
 @Accessors(chain = true)
-public class UserDto implements Serializable {
+public class UserDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;

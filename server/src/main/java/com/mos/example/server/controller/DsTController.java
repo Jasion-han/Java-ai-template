@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 多数据源事务示例接口</br>
+ * 多数据源事务示例接口
  * 本类仅用于演示用法，无实际意义
  *
- * @author ly
+ * @author Han
  */
 @RestController
 @RequestMapping("dst")

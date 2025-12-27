@@ -12,25 +12,25 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Redis工具类
+ * Redis 工具类
  *
- * @author mos
+ * @author Han
  */
 @Component
 public class RedisService {
 
-    // 注入自定义的RedisTemplate
+    // 注入自定义的 RedisTemplate
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
-    // 注入StringRedisTemplate
+    // 注入 StringRedisTemplate
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 指定缓存失效时间
      *
-     * @param key     缓存的key
+     * @param key     缓存的 key
      * @param timeout 超时时间
      */
     public Boolean expire(String key, long timeout) {
@@ -40,7 +40,7 @@ public class RedisService {
     /**
      * 获取缓存失效时间
      *
-     * @param key 缓存的key
+     * @param key 缓存的 key
      * @return 时间(秒) 返回0代表为永久有效
      */
     public Long getExpire(String key) {
@@ -48,19 +48,19 @@ public class RedisService {
     }
 
     /**
-     * 根据规则匹配对应的所有key
+     * 根据规则匹配对应的所有 key
      *
      * @param pattern 字符串前缀
-     * @return 符合规则key构成的Set集合
+     * @return 符合规则 key 构成的 Set 集合
      */
     public Set<String> getKeys(String pattern) {
         return redisTemplate.keys(pattern);
     }
 
     /**
-     * 判断key是否存在
+     * 判断 key 是否存在
      *
-     * @param key 缓存的key
+     * @param key 缓存的 key
      * @return 是否存在
      */
     public Boolean hasKey(String key) {
@@ -70,7 +70,7 @@ public class RedisService {
     /**
      * 删除单个缓存
      *
-     * @param key 缓存的key
+     * @param key 缓存的 key
      * @return 是否删除成功
      */
     public Boolean deleteKey(String key) {
@@ -80,8 +80,8 @@ public class RedisService {
     /**
      * 删除多个缓存
      *
-     * @param collection 多个key构成的集合
-     * @return 删除的key的数量
+     * @param collection 多个 key 构成的集合
+     * @return 删除的 key 的数量
      */
     public Long deleteKey(Collection<String> collection) {
         return redisTemplate.delete(collection);
@@ -92,7 +92,7 @@ public class RedisService {
     /**
      * 获取缓存的字符串数据
      *
-     * @param key 缓存的key
+     * @param key 缓存的 key
      * @return 缓存的值
      */
     public String getString(String key) {
@@ -102,7 +102,7 @@ public class RedisService {
     /**
      * 缓存字符串
      *
-     * @param key   缓存的key
+     * @param key   缓存的 key
      * @param value 缓存的值
      */
     public void setString(String key, String value) {
@@ -112,7 +112,7 @@ public class RedisService {
     /**
      * 缓存字符串并设置失效时间
      *
-     * @param key     缓存的key
+     * @param key     缓存的 key
      * @param value   缓存的值
      * @param timeout 失效时间
      */
@@ -125,7 +125,7 @@ public class RedisService {
     /**
      * 缓存基本对象（Integer、String、实体类等）
      *
-     * @param key   缓存的key
+     * @param key   缓存的 key
      * @param value 缓存的值
      */
     public void setObject(String key, Object value) {
@@ -135,7 +135,7 @@ public class RedisService {
     /**
      * 缓存基本对象并设置失效时间
      *
-     * @param key     缓存的key
+     * @param key     缓存的 key
      * @param value   缓存的值
      * @param timeout 失效时间
      */
@@ -146,7 +146,7 @@ public class RedisService {
     /**
      * 获取缓存的基本对象
      *
-     * @param key 缓存的key
+     * @param key 缓存的 key
      * @return 缓存的值
      */
     public Object getObject(String key) {
@@ -156,7 +156,7 @@ public class RedisService {
     /**
      * 增加缓存的值（必须是整形）
      *
-     * @param key   缓存的key
+     * @param key   缓存的 key
      * @param delta 增量
      * @return 缓存的值
      */
@@ -167,7 +167,7 @@ public class RedisService {
     /**
      * 增加缓存的值（必须是浮点形）
      *
-     * @param key   缓存的key
+     * @param key   缓存的 key
      * @param delta 增量
      * @return 缓存的值
      */
@@ -178,63 +178,63 @@ public class RedisService {
     // ===============================List=================================
 
     /**
-     * 在List列表开头存入元素
+     * 在 List 列表开头存入元素
      *
-     * @param key    缓存的key
+     * @param key    缓存的 key
      * @param values 要存入的元素，可以是多个
-     * @return List列表中的元素数量
+     * @return List 列表中的元素数量
      */
     public Long setListLeft(String key, Object... values) {
         return redisTemplate.opsForList().leftPushAll(key, values);
     }
 
     /**
-     * 在List列表开头存入集合
+     * 在 List 列表开头存入集合
      *
-     * @param key    缓存的key
+     * @param key    缓存的 key
      * @param values 要存入的集合
-     * @return List列表中的元素数量
+     * @return List 列表中的元素数量
      */
     public Long setListLeft(String key, Collection<Object> values) {
         return redisTemplate.opsForList().leftPushAll(key, values);
     }
 
     /**
-     * 在List列表末尾存入元素
+     * 在 List 列表末尾存入元素
      *
-     * @param key    缓存的key
+     * @param key    缓存的 key
      * @param values 要存入的元素，可以是多个
-     * @return List列表中的元素数量
+     * @return List 列表中的元素数量
      */
     public Long setListRight(String key, Object... values) {
         return redisTemplate.opsForList().rightPushAll(key, values);
     }
 
     /**
-     * 在List列表末尾存入集合
+     * 在 List 列表末尾存入集合
      *
-     * @param key    缓存的key
+     * @param key    缓存的 key
      * @param values 要存入的集合
-     * @return List列表中的元素数量
+     * @return List 列表中的元素数量
      */
     public Long setListRight(String key, Collection<Object> values) {
         return redisTemplate.opsForList().rightPushAll(key, values);
     }
 
     /**
-     * 获取缓存的List列表
+     * 获取缓存的 List 列表中的所有元素
      *
-     * @param key 缓存的key
-     * @return List列表中的所有元素
+     * @param key 缓存的 key
+     * @return List 列表中的所有元素
      */
     public List<Object> getList(String key) {
         return redisTemplate.opsForList().range(key, 0, -1);
     }
 
     /**
-     * 删除缓存的List列表中的元素
+     * 删除缓存的 List 列表中的元素
      *
-     * @param key   缓存的key
+     * @param key   缓存的 key
      * @param count 删除数量（0：移除所有。正整数：从列表的左边移除。负整数：从列表的右边移除）
      * @param value 要删除的值
      * @return 删除元素的数量
@@ -246,9 +246,9 @@ public class RedisService {
     // ===============================Set=================================
 
     /**
-     * 向Set列表中存入元素
+     * 向 Set 列表中存入元素
      *
-     * @param key    缓存的key
+     * @param key    缓存的 key
      * @param values 要存入的元素，可以是多个
      * @return 本次缓存的数量，已存在的不会再次缓存
      */
@@ -257,19 +257,19 @@ public class RedisService {
     }
 
     /**
-     * 获取缓存的Set列表
+     * 获取缓存的 Set 列表中的所有元素
      *
-     * @param key 缓存的key
-     * @return Set列表中所有元素
+     * @param key 缓存的 key
+     * @return Set 列表中所有元素
      */
     public Set<Object> getSet(String key) {
         return redisTemplate.opsForSet().members(key);
     }
 
     /**
-     * 删除缓存的Set列表中的元素
+     * 删除缓存的 Set 列表中的元素
      *
-     * @param key    缓存的key
+     * @param key    缓存的 key
      * @param values 要删除的值，可以是多个
      * @return 删除元素的数量
      */
@@ -280,8 +280,8 @@ public class RedisService {
     /**
      * 差集
      *
-     * @param key1 Set列表1
-     * @param key2 Set列表2
+     * @param key1 Set 列表1
+     * @param key2 Set 列表2
      * @return key1和key2中，key1特有的元素
      */
     public Set<Object> getSetDiff(String key1, String key2) {
@@ -291,8 +291,8 @@ public class RedisService {
     /**
      * 交集
      *
-     * @param key1 Set列表1
-     * @param key2 Set列表2
+     * @param key1 Set 列表1
+     * @param key2 Set 列表2
      * @return key1和key2的公有元素
      */
     public Set<Object> getSetInter(String key1, String key2) {
@@ -302,8 +302,8 @@ public class RedisService {
     /**
      * 并集
      *
-     * @param key1 Set列表1
-     * @param key2 Set列表2
+     * @param key1 Set 列表1
+     * @param key2 Set 列表2
      * @return key1和key2的所有元素
      */
     public Set<Object> getSetUnion(String key1, String key2) {
@@ -313,20 +313,20 @@ public class RedisService {
     // ===============================Hash=================================
 
     /**
-     * 向Hash列表中存入键值对
+     * 向 Hash 列表中存入键值对
      *
-     * @param key       缓存的key
-     * @param hashKey   Hash列表的键名
-     * @param hashValue Hash列表的键值
+     * @param key       缓存的 key
+     * @param hashKey   Hash 列表的键名
+     * @param hashValue Hash 列表的键值
      */
     public void setHash(String key, String hashKey, Object hashValue) {
         redisTemplate.opsForHash().put(key, hashKey, hashValue);
     }
 
     /**
-     * 向Hash列表中存入Map集合
+     * 向 Hash 列表中存入 Map 集合
      *
-     * @param key 缓存的key
+     * @param key 缓存的 key
      * @param map 要存入的集合
      */
     public void setHash(String key, Map<Object, Object> map) {
@@ -334,31 +334,31 @@ public class RedisService {
     }
 
     /**
-     * 获取缓存的Hash列表的单个键值
+     * 获取缓存的 Hash 列表的单个键值
      *
-     * @param key     缓存的key
-     * @param hashKey Hash列表的键名
-     * @return Hash列表的键值
+     * @param key     缓存的 key
+     * @param hashKey Hash 列表的键名
+     * @return Hash 列表的键值
      */
     public Object getHash(String key, String hashKey) {
         return redisTemplate.opsForHash().get(key, hashKey);
     }
 
     /**
-     * 获取缓存的Hash列表的所有键值对
+     * 获取缓存的 Hash 列表的所有键值对
      *
-     * @param key 缓存的key
-     * @return Hash列表的所有键值对
+     * @param key 缓存的 key
+     * @return Hash 列表的所有键值对
      */
     public Map<Object, Object> getHash(String key) {
         return redisTemplate.opsForHash().entries(key);
     }
 
     /**
-     * 删除缓存的Hash列表的键值对
+     * 删除缓存的 Hash 列表的键值对
      *
-     * @param key     缓存的key
-     * @param hashKey Hash列表的键名，可以有多个
+     * @param key     缓存的 key
+     * @param hashKey Hash 列表的键名，可以有多个
      * @return 删除键值对的数量
      */
     public Long delHashValue(String key, Object... hashKey) {

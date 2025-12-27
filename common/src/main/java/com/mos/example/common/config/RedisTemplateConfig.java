@@ -12,8 +12,8 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
- * RedisTemplate配置
- * @author mos
+ * RedisTemplate 配置
+ * @author Han
  */
 @Configuration
 public class RedisTemplateConfig {
@@ -27,9 +27,9 @@ public class RedisTemplateConfig {
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.activateDefaultTyping(LaissezFaireSubTypeValidator.instance, ObjectMapper.DefaultTyping.NON_FINAL);
 
-        // 创建String的序列化器
+        // 创建 String 的序列化器
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        // 创建Object的序列化器（使用Jackson序列化）
+        // 创建 Object 的序列化器（使用 Jackson 序列化）
         Jackson2JsonRedisSerializer<Object> jsonRedisSerializer = new Jackson2JsonRedisSerializer<>(objectMapper, Object.class);
 
         // 【key】和【hash列表的key】都采用String的序列化方式

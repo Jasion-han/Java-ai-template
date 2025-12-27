@@ -1,42 +1,43 @@
 package com.mos.example.core.service;
 
 import com.mos.example.common.base.RPage;
-import com.mos.example.common.dto.UserChangePasswordDto;
-import com.mos.example.common.dto.UserDto;
-import com.mos.example.common.dto.query.UserQueryDto;
+import com.mos.example.common.dto.UserChangePasswordDTO;
+import com.mos.example.common.dto.UserDTO;
+import com.mos.example.common.dto.query.UserQueryDTO;
 import com.mos.example.common.vo.UserVo;
 
 /**
  * 用户服务
- * @author ly
+ * @author Han
  */
 public interface UserService {
 
     /**
      * 新增用户
      *
-     * @return
+     * @param userDTO 用户 DTO
+     * @return 插入成功的行数
      */
-    Integer insert(UserDto userDto);
+    Integer insert(UserDTO userDTO);
 
     /**
      * 修改密码
      *
-     * @param userChangePasswordDto
+     * @param userChangePasswordDTO 用户修改密码 DTO
      */
-    void changePassword(UserChangePasswordDto userChangePasswordDto);
+    void changePassword(UserChangePasswordDTO userChangePasswordDTO);
 
     /**
      * 获取用户分页
-     * @param userQueryDto
-     * @return
+     * @param userQueryDTO 用户查询 DTO
+     * @return 用户分页信息
      */
-    RPage<UserVo> getPage(UserQueryDto userQueryDto);
+    RPage<UserVo> getPage(UserQueryDTO userQueryDTO);
 
     /**
      * 获取用户信息
-     * @param userId
-     * @return
+     * @param userId 用户 ID
+     * @return 用户信息
      */
     UserVo getById(Integer userId);
 }

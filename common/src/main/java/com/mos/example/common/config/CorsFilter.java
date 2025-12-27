@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * 跨域过滤器
- * @author mos
+ * @author Han
  */
 @Component
 @Order(-200)
@@ -29,7 +29,7 @@ public class CorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         // 有效时间
         response.setHeader("Access-Control-Max-Age", "3600");
-        // 允许的header参数
+        // 允许的 header 参数
         response.setHeader("Access-Control-Allow-Headers", "*");
 
         // 如果是预检请求，直接返回

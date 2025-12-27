@@ -9,10 +9,10 @@ import org.apache.ibatis.session.Configuration;
 import java.util.List;
 
 /**
- * 自定义SQL注入器<br/>
+ * 自定义SQL注入器
  * 扩展MybatisPlus默认的SQL注入功能，添加批量插入方法
  *
- * @author mos
+ * @author Han
  */
 public class EasySqlInjector extends DefaultSqlInjector {
 

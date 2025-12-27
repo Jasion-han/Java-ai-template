@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 自定义业务异常
  *
- * @author mos
+ * @author Han
  */
 
 @Getter

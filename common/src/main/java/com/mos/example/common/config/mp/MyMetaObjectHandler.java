@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 /**
  * 数据库时间自动填充
- * @author mos
+ * @author Han
  */
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {

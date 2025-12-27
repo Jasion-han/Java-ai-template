@@ -10,9 +10,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * SaToken配置
+ * SaToken 配置
  *
- * @author mos
+ * @author Han
  */
 @Configuration
 public class SaTokenConfig implements WebMvcConfigurer {
@@ -24,9 +24,9 @@ public class SaTokenConfig implements WebMvcConfigurer {
                 .addExclude("/favicon.ico", "/index.html",
                         // 放行认证相关
                         "/auth/**", "/dst/**",
-                        // 放行druid控制台
+                        // 放行 druid 控制台
                         "/druid/**",
-                        // 放行knife4j文档
+                        // 放行 knife4j 文档
                         "/doc.html", "/webjars/**", "/swagger-resources/**", "/v3/api-docs/**")
                 .setAuth(obj -> {
                     if (!StpUtil.isLogin()) {

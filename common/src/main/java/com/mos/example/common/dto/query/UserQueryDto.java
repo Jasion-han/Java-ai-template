@@ -1,19 +1,19 @@
 package com.mos.example.common.dto.query;
 
-import com.mos.example.common.dto.UserDto;
+import com.mos.example.common.dto.UserDTO;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * @author ly
+ * @author Han
  * @since 2025/5/27
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
-public class UserQueryDto extends UserDto {
+public class UserQueryDTO extends UserDTO {
 
     @Schema(description = "页码", example = "1")
     private Integer pageNo = 1;

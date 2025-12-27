@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * swagger配置
- * @author mos
+ * swagger 配置
+ * @author Han
  */
 @Configuration
 public class SwaggerConfig {

@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 /**
- * 多数据源事务示例<br/>
+ * 多数据源事务示例
  * 本类仅用于演示用法，无实际意义
  *
- * @author ly
+ * @author Han
  */
 @Service
 @RequiredArgsConstructor

@@ -7,7 +7,7 @@ import lombok.experimental.Accessors;
 /**
  * 已登录用户信息
  *
- * @author ly
+ * @author Han
  */
 @Data
 @Accessors(chain = true)

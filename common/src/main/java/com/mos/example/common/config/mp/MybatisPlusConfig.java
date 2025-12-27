@@ -9,14 +9,14 @@ import org.springframework.context.annotation.Configuration;
 /**
  * MybatisPlus 配置
  *
- * @author mos
+ * @author Han
  */
 @Configuration
 public class MybatisPlusConfig {
 
     /**
      * 配置拦截器
-     * @return
+     * @return MybatisPlusInterceptor
      */
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
@@ -29,9 +29,9 @@ public class MybatisPlusConfig {
     }
 
     /**
-     * 配置自定义SQL注入器<br/>
+     * 配置自定义SQL注入器
      * 用于注入自定义的SQL方法，如批量插入等
-     * @return
+     * @return EasySqlInjector
      */
     @Bean
     public EasySqlInjector easySqlInjector() {

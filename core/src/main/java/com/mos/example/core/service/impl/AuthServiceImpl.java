@@ -9,10 +9,10 @@ import cn.hutool.core.util.RandomUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.mos.example.common.constant.RedisPrefixConstants;
 import com.mos.example.common.domain.User;
-import com.mos.example.common.dto.SmsCaptchaDto;
-import com.mos.example.common.dto.UserDto;
-import com.mos.example.common.dto.UserLoginDto;
-import com.mos.example.common.dto.UserSmsLoginDto;
+import com.mos.example.common.dto.SmsCaptchaDTO;
+import com.mos.example.common.dto.UserDTO;
+import com.mos.example.common.dto.UserLoginDTO;
+import com.mos.example.common.dto.UserSmsLoginDTO;
 import com.mos.example.common.exception.BusinessException;
 import com.mos.example.common.utils.RedisService;
 import com.mos.example.common.vo.UserInfo;
@@ -31,7 +31,7 @@ import java.util.UUID;
 
 /**
  * 认证服务实现类
- * @author ly
+ * @author Han
  */
 @Slf4j
 @Service
@@ -49,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
         CircleCaptcha circleCaptcha = CaptchaUtil.createCircleCaptcha(150, 48, 4, 20);
         String codeValue = circleCaptcha.getCode();
         String imageBase64 = circleCaptcha.getImageBase64();
-        // 将验证码存储到Redis中
+        // 将验证码存储到 Redis 中
         String codeKey = UUID.randomUUID().toString().replace("-", "");
         redisService.setString(RedisPrefixConstants.PIC_CAPTCHA + codeKey, codeValue, 60L);
 
@@ -60,27 +60,27 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void getSmsCaptcha(SmsCaptchaDto smsCaptchaDto) {
+    public void getSmsCaptcha(SmsCaptchaDTO smsCaptchaDTO) {
         // 验证图片验证码
-        verifyPicCode(smsCaptchaDto.getCaptchaKey(), smsCaptchaDto.getCaptchaValue());
-        // 将短信验证码存储到Redis中
+        verifyPicCode(smsCaptchaDTO.getCaptchaKey(), smsCaptchaDTO.getCaptchaValue());
+        // 将短信验证码存储到 Redis 中
         String codeValue = RandomUtil.randomNumbers(4);
-        redisService.setString(RedisPrefixConstants.SMS_CAPTCHA + smsCaptchaDto.getPhone(), codeValue, 60 * 5L);
+        redisService.setString(RedisPrefixConstants.SMS_CAPTCHA + smsCaptchaDTO.getPhone(), codeValue, 60 * 5L);
 
         // todo 发送短信验证码
     }
 
     @Override
-    public UserInfo login(UserLoginDto userLoginDto) {
+    public UserInfo login(UserLoginDTO userLoginDTO) {
         // 验证图片验证码
-        verifyPicCode(userLoginDto.getCaptchaKey(), userLoginDto.getCaptchaValue());
+        verifyPicCode(userLoginDTO.getCaptchaKey(), userLoginDTO.getCaptchaValue());
         // 验证账号密码
         User user = userMapper.selectOne(new LambdaQueryWrapper<User>()
-                .eq(User::getUsername, userLoginDto.getUsername()));
+                .eq(User::getUsername, userLoginDTO.getUsername()));
         if (user == null) {
             throw new BusinessException("账号密码错误");
         }
-        if (!passwordEncoder.matches(userLoginDto.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) {
             throw new BusinessException("账号密码错误");
         }
 
@@ -93,19 +93,19 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public UserInfo smsLogin(UserSmsLoginDto userSmsLoginDto) {
+    public UserInfo smsLogin(UserSmsLoginDTO userSmsLoginDTO) {
         // 验证短信验证码
-        verifySmsCode(userSmsLoginDto.getPhone(), userSmsLoginDto.getSmsCode());
+        verifySmsCode(userSmsLoginDTO.getPhone(), userSmsLoginDTO.getSmsCode());
 
         // 不存在则自动注册
         User user = userMapper.selectOne(new LambdaQueryWrapper<User>()
-                .eq(User::getPhone, userSmsLoginDto.getPhone()));
+                .eq(User::getPhone, userSmsLoginDTO.getPhone()));
         if (user == null) {
-            UserDto userDto = new UserDto();
-            userDto.setPhone(userSmsLoginDto.getPhone())
-                    .setUsername(userSmsLoginDto.getPhone())
-                    .setNickname("用户" + DesensitizedUtil.mobilePhone(userSmsLoginDto.getPhone()));
-            Integer userId = userService.insert(userDto);
+            UserDTO userDTO = new UserDTO();
+            userDTO.setPhone(userSmsLoginDTO.getPhone())
+                    .setUsername(userSmsLoginDTO.getPhone())
+                    .setNickname("用户" + DesensitizedUtil.mobilePhone(userSmsLoginDTO.getPhone()));
+            Integer userId = userService.insert(userDTO);
             user = userMapper.selectById(userId);
         }
 
@@ -120,8 +120,8 @@ public class AuthServiceImpl implements AuthService {
     /**
      * 校验图片验证码
      *
-     * @param captchaKey
-     * @param captchaValue
+     * @param captchaKey   图片验证码的 key
+     * @param captchaValue 图片验证码的值
      */
     private void verifyPicCode(String captchaKey, String captchaValue) {
         if (captchaValue.equalsIgnoreCase("1234")) {
@@ -142,14 +142,14 @@ public class AuthServiceImpl implements AuthService {
     /**
      * 校验短信验证码
      *
-     * @param phone
-     * @param captchaValue
+     * @param phone        手机号
+     * @param captchaValue 短信验证码的值
      */
     private void verifySmsCode(String phone, String captchaValue) {
         if (captchaValue.equalsIgnoreCase("1234")) {
             return;
         }
-        // 校验图片验证码是否正确
+        // 校验短信验证码是否正确
         String redisGet = redisService.getString(RedisPrefixConstants.SMS_CAPTCHA + phone);
         if (Objects.isNull(redisGet)) {
             throw new BusinessException("短信验证码已过期");

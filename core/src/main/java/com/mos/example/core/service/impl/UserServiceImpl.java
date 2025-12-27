@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mos.example.common.base.RPage;
 import com.mos.example.common.domain.User;
-import com.mos.example.common.dto.UserChangePasswordDto;
-import com.mos.example.common.dto.UserDto;
-import com.mos.example.common.dto.query.UserQueryDto;
+import com.mos.example.common.dto.UserChangePasswordDTO;
+import com.mos.example.common.dto.UserDTO;
+import com.mos.example.common.dto.query.UserQueryDTO;
 import com.mos.example.common.exception.BusinessException;
 import com.mos.example.common.utils.GenerateUtil;
 import com.mos.example.common.utils.PageUtil;
@@ -26,7 +26,7 @@ import java.util.Objects;
 
 /**
  * 用户服务实现类
- * @author ly
+ * @author Han
  */
 @Service
 @RequiredArgsConstructor
@@ -36,16 +36,16 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public Integer insert(UserDto userDto) {
+    public Integer insert(UserDTO userDTO) {
         LambdaQueryWrapper<User> queryWrapper = new LambdaQueryWrapper<>();
         // 手机号唯一验证
-        Long count = userMapper.selectCount(queryWrapper.eq(User::getPhone, userDto.getPhone()));
+        Long count = userMapper.selectCount(queryWrapper.eq(User::getPhone, userDTO.getPhone()));
         if (count > 0) {
             throw new BusinessException("手机号已被绑定");
         }
         // 用户名唯一验证
         queryWrapper.clear();
-        count = userMapper.selectCount(queryWrapper.eq(User::getUsername, userDto.getUsername()));
+        count = userMapper.selectCount(queryWrapper.eq(User::getUsername, userDTO.getUsername()));
         if (count > 0) {
             throw new BusinessException("用户名已被占用");
         }
@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
         String md5Password = DigestUtil.md5Hex(password).toUpperCase();
         String enPassword = passwordEncoder.encode(md5Password);
 
-        User user = BeanUtil.copyProperties(userDto, User.class);
+        User user = BeanUtil.copyProperties(userDTO, User.class);
         user.setNumber(GenerateUtil.generateNumber("YH", 3))
                 .setPassword(enPassword);
         userMapper.insert(user);
@@ -62,32 +62,32 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void changePassword(UserChangePasswordDto userChangePasswordDto) {
-        User user = userMapper.selectById(userChangePasswordDto.getUserId());
+    public void changePassword(UserChangePasswordDTO userChangePasswordDTO) {
+        User user = userMapper.selectById(userChangePasswordDTO.getUserId());
         if (user == null) {
             throw new BusinessException("用户不存在");
         }
-        if (!passwordEncoder.matches(userChangePasswordDto.getOldPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(userChangePasswordDTO.getOldPassword(), user.getPassword())) {
             throw new BusinessException("原密码错误");
         }
 
         userMapper.update(new LambdaUpdateWrapper<User>()
                 .eq(User::getUserId, user.getUserId())
-                .set(User::getPassword, passwordEncoder.encode(userChangePasswordDto.getPassword())));
+                .set(User::getPassword, passwordEncoder.encode(userChangePasswordDTO.getPassword())));
     }
 
     @Override
-    public RPage<UserVo> getPage(UserQueryDto userQueryDto) {
-        Page<User> page = new Page<>(userQueryDto.getPageNo(), userQueryDto.getPageSize());
-        page = PageUtil.addOrder(page, userQueryDto.getOrder());
+    public RPage<UserVo> getPage(UserQueryDTO userQueryDTO) {
+        Page<User> page = new Page<>(userQueryDTO.getPageNo(), userQueryDTO.getPageSize());
+        page = PageUtil.addOrder(page, userQueryDTO.getOrder());
         Page<User> pageResult = userMapper.selectPage(page, new LambdaQueryWrapper<User>()
-                .eq(Objects.nonNull(userQueryDto.getNumber()), User::getNumber, userQueryDto.getNumber())
-                .eq(Objects.nonNull(userQueryDto.getPhone()), User::getPhone, userQueryDto.getPhone())
-                .and(Objects.nonNull(userQueryDto.getSearch()), wrapper ->
-                        wrapper.like(User::getNickname, userQueryDto.getSearch())
-                                .or().like(User::getUsername, userQueryDto.getSearch())));
+                .eq(Objects.nonNull(userQueryDTO.getNumber()), User::getNumber, userQueryDTO.getNumber())
+                .eq(Objects.nonNull(userQueryDTO.getPhone()), User::getPhone, userQueryDTO.getPhone())
+                .and(Objects.nonNull(userQueryDTO.getSearch()), wrapper ->
+                        wrapper.like(User::getNickname, userQueryDTO.getSearch())
+                                .or().like(User::getUsername, userQueryDTO.getSearch())));
         List<UserVo> userVoList = BeanUtil.copyToList(pageResult.getRecords(), UserVo.class);
-        return RPage.success(userVoList, userQueryDto.getPageNo(), userQueryDto.getPageSize(), pageResult.getTotal());
+        return RPage.success(userVoList, userQueryDTO.getPageNo(), userQueryDTO.getPageSize(), pageResult.getTotal());
     }
 
     @Override

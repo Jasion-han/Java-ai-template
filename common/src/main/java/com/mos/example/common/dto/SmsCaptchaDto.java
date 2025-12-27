@@ -5,12 +5,12 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 取短信验证码DTO
- * @author ly
+ * 取短信验证码 DTO
+ * @author Han
  */
 @Data
 @Accessors(chain = true)
-public class SmsCaptchaDto {
+public class SmsCaptchaDTO {
 
     /**
      * 手机号
@@ -19,14 +19,14 @@ public class SmsCaptchaDto {
     private String phone;
 
     /**
-     * 验证码Key
+     * 验证码 Key
      */
-    @NotBlank(message = "图片验证码key不能为空")
+    @NotBlank(message = "验证码 Key 不能为空")
     private String captchaKey;
 
     /**
      * 验证码值
      */
-    @NotBlank(message = "图片验证码不能为空")
+    @NotBlank(message = "验证码值不能为空")
     private String captchaValue;
 }

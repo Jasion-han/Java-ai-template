@@ -5,9 +5,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import java.util.Collection;
 
 /**
- * BaseMapper扩展接口
+ * BaseMapper 扩展接口
  *
- * @author mos
+ * @author Han
  */
 public interface EasyBaseMapper<T> extends BaseMapper<T> {
 

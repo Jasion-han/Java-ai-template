@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
- * 登录用户DTO类
+ * 登录用户 DTO
  *
- * @author ly
+ * @author Han
  */
 @Data
 @Accessors(chain = true)
-public class UserSmsLoginDto {
+public class UserSmsLoginDTO {
 
     @Schema(description = "电话")
     @NotBlank(message = "电话不能为空")

@@ -1,9 +1,9 @@
 package com.mos.example.server.controller;
 
 import com.mos.example.common.base.RPage;
-import com.mos.example.common.dto.UserChangePasswordDto;
-import com.mos.example.common.dto.UserDto;
-import com.mos.example.common.dto.query.UserQueryDto;
+import com.mos.example.common.dto.UserChangePasswordDTO;
+import com.mos.example.common.dto.UserDTO;
+import com.mos.example.common.dto.query.UserQueryDTO;
 import com.mos.example.common.vo.UserVo;
 import com.mos.example.core.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 用户接口
  *
- * @author ly
+ * @author Han
  */
 @RestController
 @RequestMapping("user")
@@ -27,20 +27,20 @@ public class UserController {
 
     @PostMapping("insert")
     @Operation(summary = "新增用户")
-    public Integer insert(@RequestBody @Valid UserDto userDto) {
-        return userService.insert(userDto);
+    public Integer insert(@RequestBody @Valid UserDTO userDTO) {
+        return userService.insert(userDTO);
     }
 
     @PostMapping("changePassword")
     @Operation(summary = "修改登陆密码")
-    public void changePassword(@RequestBody @Valid UserChangePasswordDto userChangePasswordDto) {
-        userService.changePassword(userChangePasswordDto);
+    public void changePassword(@RequestBody @Valid UserChangePasswordDTO userChangePasswordDTO) {
+        userService.changePassword(userChangePasswordDTO);
     }
 
     @PostMapping("getPage")
     @Operation(summary = "获取用户分页")
-    public RPage<UserVo> getPage(@RequestBody UserQueryDto userQueryDto) {
-        return userService.getPage(userQueryDto);
+    public RPage<UserVo> getPage(@RequestBody UserQueryDTO userQueryDTO) {
+        return userService.getPage(userQueryDTO);
     }
 
     @GetMapping("getById/{id}")

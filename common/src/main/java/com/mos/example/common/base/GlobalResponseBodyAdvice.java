@@ -15,7 +15,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
  * 指定 basePackages 避免影响 swagger 文档<br/>
  * 指定@Hidden注解让文档不扫描当前类
  *
- * @author mos
+ * @author Han
  */
 @Hidden
 @RestControllerAdvice(basePackages = {"com.mos.base.server.controller"})

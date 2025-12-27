@@ -8,7 +8,7 @@ import com.mos.example.common.vo.UserInfo;
 /**
  * 用户信息工具类
  *
- * @author mos
+ * @author Han
  */
 public class UserUtil {
 

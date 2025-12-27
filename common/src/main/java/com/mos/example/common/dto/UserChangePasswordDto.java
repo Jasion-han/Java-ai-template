@@ -10,19 +10,19 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * 修改密码DTO
+ * 修改密码 DTO
  *
- * @author ly
+ * @author Han
  */
 @Data
 @Accessors(chain = true)
-public class UserChangePasswordDto implements Serializable {
+public class UserChangePasswordDTO implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Schema(description = "用户id")
-    @NotNull(message = "用户id不能为空")
+    @Schema(description = "用户 ID")
+    @NotNull(message = "用户 ID 不能为空")
     private Integer userId;
 
     @Schema(description = "原密码")

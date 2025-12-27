@@ -1,8 +1,8 @@
 package com.mos.example.common.constant;
 
 /**
- * Redis前缀
- * @author mos
+ * Redis 前缀
+ * @author Han
  */
 public final class RedisPrefixConstants {
 

@@ -1,8 +1,8 @@
 package com.mos.example.server.controller;
 
-import com.mos.example.common.dto.SmsCaptchaDto;
-import com.mos.example.common.dto.UserLoginDto;
-import com.mos.example.common.dto.UserSmsLoginDto;
+import com.mos.example.common.dto.SmsCaptchaDTO;
+import com.mos.example.common.dto.UserLoginDTO;
+import com.mos.example.common.dto.UserSmsLoginDTO;
 import com.mos.example.common.utils.UserUtil;
 import com.mos.example.common.vo.UserInfo;
 import com.mos.example.core.service.AuthService;
@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 认证接口
  *
- * @author ly
+ * @author Han
  */
 @RestController
 @RequestMapping("auth")
@@ -41,20 +41,20 @@ public class AuthController {
 
     @PostMapping("/getSmsCaptcha")
     @Operation(summary = "获取短信验证码")
-    public void getSmsCaptcha(@RequestBody @Valid SmsCaptchaDto smsCaptchaDto) {
-        authService.getSmsCaptcha(smsCaptchaDto);
+    public void getSmsCaptcha(@RequestBody @Valid SmsCaptchaDTO smsCaptchaDTO) {
+        authService.getSmsCaptcha(smsCaptchaDTO);
     }
 
     @PostMapping("login")
     @Operation(summary = "密码登录")
-    public UserInfo login(@RequestBody @Valid UserLoginDto userLoginDto) {
-        return authService.login(userLoginDto);
+    public UserInfo login(@RequestBody @Valid UserLoginDTO userLoginDTO) {
+        return authService.login(userLoginDTO);
     }
 
     @PostMapping("smsLogin")
     @Operation(summary = "短信验证码登录")
-    public UserInfo smsLogin(@RequestBody @Valid UserSmsLoginDto userSmsLoginDto) {
-        return authService.smsLogin(userSmsLoginDto);
+    public UserInfo smsLogin(@RequestBody @Valid UserSmsLoginDTO userSmsLoginDTO) {
+        return authService.smsLogin(userSmsLoginDTO);
     }
 
 }

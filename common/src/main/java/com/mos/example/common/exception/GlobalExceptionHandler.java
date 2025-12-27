@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.stream.Collectors;
 
 /**
- * 全局异常处理器<br/>
- * 指定@Hidden注解让文档不扫描当前类
+ * 全局异常处理器
+ * 指定 @Hidden 注解让文档不扫描当前类
  *
- * @author mos
+ * @author Han
  */
 @Hidden
 @Slf4j
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class GlobalExceptionHandler {
 
     /**
-     * Valid参数校验失败异常
+     * Valid 参数校验失败异常
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Result<Object> handleValidException(MethodArgumentNotValidException e) {

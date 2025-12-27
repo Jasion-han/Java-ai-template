@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * 生成工具
- * @author mos
+ * @author Han
  */
 public class GenerateUtil {
 
@@ -15,7 +15,7 @@ public class GenerateUtil {
      * 根据时间生成编号
      * @param prefix - 编号前缀
      * @param suffixLength - 编号后缀长度
-     * @return
+     * @return 编号
      */
     public static String generateNumber(String prefix, int suffixLength) {
         String randomString = RandomUtil.randomNumbers(suffixLength);
